@@ -1,0 +1,18 @@
+# git撤销本地commit操作 
+git reset --soft HEAD^
+ 
+--mixed
+不删除工作空间提交的代码，撤销 commit，并且撤销 git add . 操作。
+注意：-mixed 为默认参数。git reset --mixed HEAD^ 和 git reset HEAD^ 效果是一样的。
+ 
+--soft
+不删除工作空间提交的代码，撤销 commit，但不撤销 git add . 操作。
+注意：就是说仅仅是撤回后，修改的代码仍然保留。
+ 
+--hard
+删除工作空间提交的代码，撤销 commit，并且撤销 git add . 操作。
+注意：就是说即撤回后，本地提交的代码也不保留。就等于恢复到了上一次的 commit 状态。
+ 
+脱坑技能
+1）HEAD^ 的意思是上一个版本，也可以写成 HEAD~1。如果你进行了2次 commit，想都撤回，可以使用 HEAD~2
+2）如果 commit 注释写错了，只是想改一下注释，只需要执行命令行：git commit --amend。此时会进入默认 vim 编辑器，修改注释完后保存即可。
