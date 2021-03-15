@@ -1,0 +1,22 @@
+#!/bin/sh /etc/rc.common
+# Copyright (C) 2006-2011 OpenWrt.org
+
+START=14
+
+start() 
+{
+	local val=$(cfg getfactory sc_factory_mode | head -1)
+	if [ 2 -eq $val ];then
+		brctl addbr br-lan
+		ifconfig br-lan up
+		ifconfig br-lan 192.168.0.1
+		/usr/sbin/dnsmasq -C /etc/dnsmasq.conf.ftm & 
+		brctl addif br-lan eth0
+		brctl addif br-lan eth1
+		brctl addif br-lan eth2
+		brctl addif br-lan eth3
+		brctl addif br-lan eth4
+		ping 192.168.0.255 -c 10 &
+	fi
+}
+

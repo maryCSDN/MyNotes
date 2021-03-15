@@ -1,0 +1,3 @@
+iptables -N whitemacfilter
+iptables -I FORWARD -j whitemacfilter
+iptables -A whitemacfilter -i br-lan -j DROP

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+[ "$ACTION" = ifup ] || exit 0
+ip -6 route add default dev rmnet_mhi0.1
+#route -A inet6 add default gw 2001:1234:1234:1234::1

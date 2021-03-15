@@ -1,0 +1,2 @@
+iptables -N macfilter
+iptables -I FORWARD -j macfilter

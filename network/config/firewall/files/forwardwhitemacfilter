@@ -1,0 +1,3 @@
+iptables -N forwardwhitemacfilter
+iptables -I FORWARD -j forwardwhitemacfilter
+iptables -I delegate_forward -i br-lan -j DROP

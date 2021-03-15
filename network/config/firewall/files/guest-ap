@@ -1,0 +1,2 @@
+iptables -I INPUT -m physdev --physdev-in ath11 -p tcp --dport 80  -d `uci get network.lan.ipaddr` -j DROP
+iptables -I INPUT -m physdev --physdev-in ath11 -p tcp --dport 443 -d `uci get network.lan.ipaddr` -j DROP

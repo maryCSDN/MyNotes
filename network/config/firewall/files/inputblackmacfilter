@@ -1,0 +1,3 @@
+iptables -N inputblackmacfilter
+iptables -I INPUT -j inputblackmacfilter
+iptables -I INPUT -p udp -i br-lan --dport 67:68 -j  ACCEPT

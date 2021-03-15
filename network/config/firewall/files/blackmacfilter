@@ -1,0 +1,3 @@
+iptables -N blackmacfilter
+iptables -I FORWARD -j blackmacfilter
+iptables -A blackmacfilter -i br-lan -j ACCEPT

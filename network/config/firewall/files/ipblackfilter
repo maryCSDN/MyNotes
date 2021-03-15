@@ -1,0 +1,2 @@
+iptables -N ipblackfilter
+iptables -I FORWARD -j ipblackfilter

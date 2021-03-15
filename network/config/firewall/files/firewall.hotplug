@@ -1,0 +1,25 @@
+#!/bin/sh
+
+[ "$ACTION" = ifup -o "$ACTION" = ifupdate ] || exit 0
+[ "$ACTION" = ifupdate -a -z "$IFUPDATE_ADDRESSES" -a -z "$IFUPDATE_DATA" ] && exit 0
+
+/etc/init.d/firewall enabled || exit 0
+
+fw3 -q network "$INTERFACE" >/dev/null || exit 0
+
+    config_load network
+    config_get wan6_iface wan6 ifname
+    config_get wan_iface wan ifname
+    ip6tables -t nat -A POSTROUTING -o "$wan6_iface" -j MASQUERADE
+    
+get_firewall_v4(){
+    uci get firewall.@defaults[0].disabled
+}
+firewall_v4=`get_firewall_v4`
+
+if [ "$firewall_v4" -eq 1 ]; then
+    iptables -t nat -A POSTROUTING -o "$wan_iface" -j MASQUERADE
+fi
+
+logger -t firewall "Reloading firewall due to $ACTION of $INTERFACE ($DEVICE)"
+fw3 -q reload

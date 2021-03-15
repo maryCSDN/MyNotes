@@ -1,0 +1,2 @@
+iptables -N forwardblackmacfilter
+iptables -I FORWARD -j forwardblackmacfilter

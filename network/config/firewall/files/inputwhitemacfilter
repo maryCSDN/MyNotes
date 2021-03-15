@@ -1,0 +1,4 @@
+iptables -N inputwhitemacfilter
+iptables -I INPUT -j inputwhitemacfilter
+iptables -I INPUT -p udp -i br-lan --dport 67:68 -j  ACCEPT
+iptables -A INPUT -i br-lan -j DROP

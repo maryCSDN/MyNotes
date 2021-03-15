@@ -1,0 +1,2 @@
+iptables -N vmserverfilter
+iptables -I FORWARD -j vmserverfilter
